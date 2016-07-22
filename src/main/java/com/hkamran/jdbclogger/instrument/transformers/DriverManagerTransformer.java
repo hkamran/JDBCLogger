@@ -1,4 +1,4 @@
-package com.hkamran.jdbcrecorder.instrument.transformers;
+package com.hkamran.jdbclogger.instrument.transformers;
 
 import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
@@ -13,7 +13,7 @@ import javassist.NotFoundException;
 
 import org.apache.log4j.Logger;
 
-import com.hkamran.jdbcrecorder.sql.wrappers.ConnectionWrapper;
+import com.hkamran.jdbclogger.sql.wrappers.ConnectionWrapper;
 
 public class DriverManagerTransformer implements ClassFileTransformer {
 	

@@ -1,4 +1,4 @@
-package com.hkamran.jdbcrecorder.sql.wrappers;
+package com.hkamran.jdbclogger.sql.wrappers;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

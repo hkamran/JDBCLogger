@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import com.hkamran.jdbclogger.sql.wrappers.QueryWrapper;
+
 import junit.framework.Assert;
 
 public class QueryWrapperTest {

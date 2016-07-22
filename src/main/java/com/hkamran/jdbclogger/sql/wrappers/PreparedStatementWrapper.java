@@ -1,4 +1,4 @@
-package com.hkamran.jdbcrecorder.sql.wrappers;
+package com.hkamran.jdbclogger.sql.wrappers;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -24,9 +24,6 @@ import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 
-import com.hkamran.jdbcrecorder.QueryWrapper;
-import com.hkamran.jdbcrecorder.Request;
-
 public class PreparedStatementWrapper extends StatementWrapper implements PreparedStatement {
 
 	public PreparedStatement pstmt;
@@ -40,36 +37,33 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 
 	@Override
 	public ResultSet executeQuery() throws SQLException {
-		Request request = new Request(queries);
-		log.debug("Executing query... " + request.hashCode() + " ... " + request.toString());
+		log.debug("Executing query... " + queries.hashCode() + " ... " + queries.toString());
 		
-		log.info("Fetching result for query... "  + request.hashCode());
+		log.info("Fetching result for query... "  + queries.hashCode());
 		ResultSet result = this.pstmt.executeQuery();
-		log.info("Finished fetching result for database... "  + request.hashCode());
+		log.info("Finished fetching result for database... "  + queries.hashCode());
 
 		return result;
 	}
 
 	@Override
 	public int executeUpdate() throws SQLException {
-		Request request = new Request(queries);
-		log.debug("Executing update " + request.hashCode() + " ... " + request.toString());
+		log.debug("Executing update " + queries.hashCode() + " ... " + queries.toString());
 		
-		log.info("Fetching result for query... "  + request.hashCode());
+		log.info("Fetching result for query... "  + queries.hashCode());
 		Integer result = this.pstmt.executeUpdate();
-		log.info("Finished fetching result for database... "  + request.hashCode());
+		log.info("Finished fetching result for database... "  + queries.hashCode());
 		
 		return result;
 	}
 
 	@Override
 	public boolean execute() throws SQLException {
-		Request request = new Request(queries);
-		log.debug("Executing query " + request.hashCode() + " ... " + request.toString());
+		log.debug("Executing query " + queries.hashCode() + " ... " + queries.toString());
 		
-		log.info("Fetching result for query... "  + request.hashCode());
+		log.info("Fetching result for query... "  + queries.hashCode());
 		Boolean result = this.pstmt.execute();
-		log.info("Finished fetching result for database... "  + request.hashCode());
+		log.info("Finished fetching result for database... "  + queries.hashCode());
 		
 		return result;
 	}

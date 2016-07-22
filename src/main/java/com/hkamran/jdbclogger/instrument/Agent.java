@@ -1,10 +1,10 @@
-package com.hkamran.jdbcrecorder.instrument;
+package com.hkamran.jdbclogger.instrument;
 
 import java.lang.instrument.Instrumentation;
 import java.sql.Connection;
 
-import com.hkamran.jdbcrecorder.instrument.transformers.DriverManagerTransformer;
-import com.hkamran.jdbcrecorder.sql.wrappers.ConnectionWrapper;
+import com.hkamran.jdbclogger.instrument.transformers.DriverManagerTransformer;
+import com.hkamran.jdbclogger.sql.wrappers.ConnectionWrapper;
 
 public class Agent {
 
