@@ -8,8 +8,8 @@ Allows you to properly assess frequency, duration, and complexity of each JDBC c
 ## Quick Start
 Add the following arguments to the JVM:
 
--`-Xbootclasspath/p:<Directory>\JDBCLogger-X.X.X.jar`
--`-javaagent:<Directory>\JDBCLogger-X.X.X.jar`
+- `-Xbootclasspath/p:<Directory>\JDBCLogger-X.X.X.jar`
+- `-javaagent:<Directory>\JDBCLogger-X.X.X.jar`
 
 and then set your logger to `DEBUG` on the package `com.hkamran.jdbclogger`
 
