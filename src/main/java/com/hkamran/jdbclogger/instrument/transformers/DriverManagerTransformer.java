@@ -13,8 +13,14 @@ import javassist.NotFoundException;
 
 import org.apache.log4j.Logger;
 
+import com.hkamran.jdbclogger.instrument.Agent;
 import com.hkamran.jdbclogger.sql.wrappers.ConnectionWrapper;
 
+/**
+ * This class is responsible to modify the DriverManager to spawn our own Connection class.
+ * 
+ * @author HK
+ */
 public class DriverManagerTransformer implements ClassFileTransformer {
 	
 	private final static Logger log = Logger.getLogger(DriverManagerTransformer.class);
@@ -51,6 +57,7 @@ public class DriverManagerTransformer implements ClassFileTransformer {
 							"return new " + connectionClass + "(getConnection($1, info, Reflection.getCallerClass()));" + 
 						"}");
 				
+				Agent.running();
 				return curClass.toBytecode();
 			} catch (NotFoundException | CannotCompileException | IOException ex) {
 				ex.printStackTrace();

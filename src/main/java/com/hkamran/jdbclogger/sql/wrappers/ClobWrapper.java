@@ -10,6 +10,11 @@ import java.sql.SQLException;
 
 import javax.sql.rowset.serial.SerialClob;
 
+/**
+ * This class is a wrapper on the Clob class.
+ * 
+ * @author Hooman Kamran
+ */
 public class ClobWrapper implements Clob {
 
 	SerialClob clob;

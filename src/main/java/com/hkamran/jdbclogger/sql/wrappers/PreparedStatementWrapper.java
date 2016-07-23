@@ -37,7 +37,8 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 
 	@Override
 	public ResultSet executeQuery() throws SQLException {
-		log.debug("Executing query... " + queries.hashCode() + " ... " + queries.toString());
+
+		logExecution("Executing query... ", queries);
 		
 		log.info("Fetching result for query... "  + queries.hashCode());
 		ResultSet result = this.pstmt.executeQuery();
@@ -48,7 +49,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 
 	@Override
 	public int executeUpdate() throws SQLException {
-		log.debug("Executing update " + queries.hashCode() + " ... " + queries.toString());
+		logExecution("Executing update... ", queries);
 		
 		log.info("Fetching result for query... "  + queries.hashCode());
 		Integer result = this.pstmt.executeUpdate();
@@ -58,8 +59,8 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 	}
 
 	@Override
-	public boolean execute() throws SQLException {
-		log.debug("Executing query " + queries.hashCode() + " ... " + queries.toString());
+	public boolean execute() throws SQLException {		
+		logExecution("Executing query... ", queries);
 		
 		log.info("Fetching result for query... "  + queries.hashCode());
 		Boolean result = this.pstmt.execute();

@@ -24,6 +24,11 @@ import java.util.Calendar;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * This class represents a SQL that is going to be executed by a JDBC Statement.
+ * 
+ * @author Hooman Kamran
+ */
 public class QueryWrapper {
 	public String vars[];
 	private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");

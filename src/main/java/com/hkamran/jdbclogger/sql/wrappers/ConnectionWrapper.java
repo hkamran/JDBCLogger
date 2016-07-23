@@ -19,6 +19,11 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * This class is a wrapper on the Connection class.
+ * 
+ * @author Hooman Kamran
+ */
 public class ConnectionWrapper implements Connection {
 	
 	Connection con;

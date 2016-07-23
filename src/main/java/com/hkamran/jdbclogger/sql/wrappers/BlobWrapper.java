@@ -12,6 +12,11 @@ import javax.sql.rowset.serial.SerialException;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 
+/**
+ * This class is a wrapper on the Blob class.
+ * 
+ * @author Hooman Kamran
+ */
 public class BlobWrapper implements Blob {
 
 	SerialBlob blob;

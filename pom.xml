@@ -4,12 +4,15 @@
 
 	<groupId>com.hkamran.jdbclogger</groupId>
 	<artifactId>JDBCLogger</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>JDBCLogger</name>
-	<url>http://maven.apache.org</url>
-
+	<description>
+		View what, when, and where JDBC execution occurs.
+	</description>
+	<url>https://github.com/hkamran/JDBCLogger</url>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -24,7 +27,6 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
