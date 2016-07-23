@@ -1,11 +1,11 @@
 # JDBCLogger
 View what, when, and where JDBC execution occurs.
 
-## Purpose
-Made to analyze execution of JDBC calls in proprietary code, ORM, or any technology that hides JDBC execution.
-Allows you to properly assess frequency, duration, and complexity of each JDBC call.
+### Purpose
+Made so users can analyze the execution of JDBC calls in proprietary code, ORM, or any technology that hides JDBC functions.
+This allows you to properly assess the frequency, duration, and complexity of each JDBC call.
 
-## Quick Start
+### Quick Start
 Add the following arguments to the JVM:
 
 - `-Xbootclasspath/p:<Directory>\JDBCLogger-X.X.X.jar`
