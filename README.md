@@ -1,14 +1,24 @@
-# JDBCLogger
-View when JDBC executes queries and where it makes those calls.
+#Rekodi
+A proxy with the ability to record and playback HTTP Responses. Ideally made 
+to record service calls (SOAP/REST)
 
-##Purpose
-Made to analyze execution of JDBC calls in proprietary code, ORM, or any technology that hides JDBC execution.
-Allows you to properly assess frequency, duration, and complexity of each JDBC call.
+### Screenshot:
 
-##Quick Start
-Add the following arguments to the JVM:
+<div align="left">
+	<img src="http://hkamran.info/projects/rekodi/screenshots/screenshot_1.png"></img>
+</div>
 
-'-Xbootclasspath/p:<Directory>\JDBCLogger-X.X.X.jar' 
-'-javaagent:<Directory>\JDBCLogger-X.X.X.jar'
+### Quick Start:
 
-##Releases
+java -jar Rekodi-X-X-X.jar `-webPort [PORT]` `-proxyPort [PORT]` 
+
+- **webPort:** Specify the port for the web interface `(Optional)` `[Default: 8090]` 
+- **proxyPort:** Specify the port for the proxy 	  `(Optional)` `[Default: 9090]` 		
+	
+### Requirements:
+Java 1.7
+
+### Releases:
+Visit [releases](http://hkamran.info/projects/rekodi/releases) page
+	
+	
