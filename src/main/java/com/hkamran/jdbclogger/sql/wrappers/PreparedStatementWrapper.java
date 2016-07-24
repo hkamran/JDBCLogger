@@ -21,7 +21,9 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.log4j.Logger;
 
 public class PreparedStatementWrapper extends StatementWrapper implements PreparedStatement {
@@ -37,34 +39,48 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 
 	@Override
 	public ResultSet executeQuery() throws SQLException {
-
-		logExecution("Executing query... ", queries);
 		
-		log.info("Fetching result for query... "  + queries.hashCode());
+		logExecution("Executing query " + queries.hashCode(), queries);
+		StopWatch watch = new StopWatch();
+		watch.start();
+		
 		ResultSet result = this.pstmt.executeQuery();
-		log.info("Finished fetching result for database... "  + queries.hashCode());
+		
+		watch.stop();
+		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
 
 		return result;
 	}
 
 	@Override
 	public int executeUpdate() throws SQLException {
-		logExecution("Executing update... ", queries);
 		
-		log.info("Fetching result for query... "  + queries.hashCode());
+		logExecution("Executing update " + queries.hashCode(), queries);
+		StopWatch watch = new StopWatch();
+		watch.start();
+		
 		Integer result = this.pstmt.executeUpdate();
-		log.info("Finished fetching result for database... "  + queries.hashCode());
+		
+		watch.stop();
+		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
 		
 		return result;
 	}
 
 	@Override
 	public boolean execute() throws SQLException {		
-		logExecution("Executing query... ", queries);
+
+		logExecution("Executing query " + queries.hashCode(), queries);
+		StopWatch watch = new StopWatch();
+		watch.start();
 		
-		log.info("Fetching result for query... "  + queries.hashCode());
 		Boolean result = this.pstmt.execute();
-		log.info("Finished fetching result for database... "  + queries.hashCode());
+		
+		watch.stop();
+		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
 		
 		return result;
 	}
