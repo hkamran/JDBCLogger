@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class StatementWrapper implements Statement {
 
+	private static final int START_INDEX = 3;
 	public Statement stmt;
 	public ConnectionWrapper con;
 	public List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
@@ -79,11 +80,11 @@ public class StatementWrapper implements Statement {
 		StringBuffer callStack = new StringBuffer();
 		StackTraceElement[] elements = Thread.currentThread().getStackTrace();
 		callStack.append(System.lineSeparator());
-		for (int i = elements.length - 1; i > 3; i--) {
+		for (int i = elements.length - 1; i >= START_INDEX; i--) {
 			StackTraceElement element = elements[i];
 			
 			String newLine = System.lineSeparator();
-			if (i == 4) {
+			if (i == START_INDEX) {
 				newLine = "";
 			}
 			
