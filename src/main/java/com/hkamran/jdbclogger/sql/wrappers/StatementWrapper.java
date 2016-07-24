@@ -79,11 +79,11 @@ public class StatementWrapper implements Statement {
 		StringBuffer callStack = new StringBuffer();
 		StackTraceElement[] elements = Thread.currentThread().getStackTrace();
 		callStack.append(System.lineSeparator());
-		for (int i = 3; i < elements.length; i++) {
+		for (int i = elements.length - 1; i > 3; i--) {
 			StackTraceElement element = elements[i];
 			
 			String newLine = System.lineSeparator();
-			if (i == elements.length - 1) {
+			if (i == 4) {
 				newLine = "";
 			}
 			
