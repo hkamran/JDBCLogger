@@ -21,6 +21,8 @@ import java.util.concurrent.Executor;
 
 import org.apache.log4j.Logger;
 
+import com.hkamran.jdbclogger.instrument.LogHelper;
+
 /**
  * This class is a wrapper on the Connection class.
  * 
@@ -35,7 +37,7 @@ public class ConnectionWrapper implements Connection {
 	
 	public ConnectionWrapper(Connection con) {
 		id = counter;
-		log.info("Created a new connection " + id);
+		LogHelper.info("Created a new connection " + id, log);
 		counter++;
 		this.con = con;
 	}
@@ -85,7 +87,7 @@ public class ConnectionWrapper implements Connection {
 	}
 
 	public void close() throws SQLException {
-		log.info("Closing connection " + id);
+		LogHelper.info("Closing connection " + id, log);
 		con.close();
 	}
 
