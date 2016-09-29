@@ -26,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.log4j.Logger;
 
+import com.hkamran.jdbclogger.instrument.LogHelper;
+
 public class PreparedStatementWrapper extends StatementWrapper implements PreparedStatement {
 
 	public PreparedStatement pstmt;
@@ -34,13 +36,11 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 	public PreparedStatementWrapper(ConnectionWrapper con, PreparedStatement prepareStatement, String sql) {
 		super(con, prepareStatement, sql);
 		this.pstmt = prepareStatement;
-
 	}
 
 	@Override
 	public ResultSet executeQuery() throws SQLException {
-		
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -48,7 +48,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms"  + " on " + con.id);
 
 		return result;
 	}
@@ -56,7 +56,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 	@Override
 	public int executeUpdate() throws SQLException {
 		
-		logExecution("Executing update " + queries.hashCode(), queries);
+		LogHelper.execution("Executing update " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -64,7 +64,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -72,7 +72,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 	@Override
 	public boolean execute() throws SQLException {		
 
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -80,7 +80,7 @@ public class PreparedStatementWrapper extends StatementWrapper implements Prepar
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}

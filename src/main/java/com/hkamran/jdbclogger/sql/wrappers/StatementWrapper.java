@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.time.StopWatch;
 import org.apache.log4j.Logger;
 
+import com.hkamran.jdbclogger.instrument.LogHelper;
+
 /**
  * This class is a wrapper on the Statement class.
  * 
@@ -19,7 +21,6 @@ import org.apache.log4j.Logger;
  */
 public class StatementWrapper implements Statement {
 
-	private static final int START_INDEX = 3;
 	public Statement stmt;
 	public ConnectionWrapper con;
 	public List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
@@ -62,7 +63,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -70,28 +71,10 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 
-	}
-
-	protected void logExecution(String start, List<QueryWrapper> queries) {
-		StringBuffer callStack = new StringBuffer();
-		StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-		callStack.append(System.lineSeparator());
-		for (int i = elements.length - 1; i >= START_INDEX; i--) {
-			StackTraceElement element = elements[i];
-			
-			String newLine = System.lineSeparator();
-			if (i == START_INDEX) {
-				newLine = "";
-			}
-			
-			callStack.append("	at " + element.getClassName() + "." + element.getMethodName() + ":" + element.getLineNumber() + newLine);
-		}
-		
-		log.info(start + System.lineSeparator() + "	" + queries.toString() + callStack.toString());
 	}
 
 	@Override
@@ -99,7 +82,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 		
-		logExecution("Executing update " + queries.hashCode(), queries);
+		LogHelper.execution("Executing update " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -107,7 +90,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 
 		return result;
 	}
@@ -177,7 +160,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 		
-		logExecution("Executing update " + queries.hashCode(), queries);
+		LogHelper.execution("Executing update " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -185,7 +168,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -250,9 +233,7 @@ public class StatementWrapper implements Statement {
 
 	@Override
 	public int[] executeBatch() throws SQLException {
-		logExecution("Executing batch... ", queries);
-	
-		logExecution("Executing batch query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing batch query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -260,7 +241,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -285,7 +266,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -293,7 +274,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -303,7 +284,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 
-		logExecution("Executing update " + queries.hashCode(), queries);
+		LogHelper.execution("Executing update " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -311,7 +292,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -321,7 +302,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 		
-		logExecution("Executing update " + queries.hashCode(), queries);
+		LogHelper.execution("Executing update " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -329,7 +310,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -339,7 +320,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -347,7 +328,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 
 		return result;
 	}
@@ -357,7 +338,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 		
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -365,7 +346,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 		
 		return result;
 	}
@@ -375,7 +356,7 @@ public class StatementWrapper implements Statement {
 		List<QueryWrapper> queries = new ArrayList<QueryWrapper>();
 		queries.add(new QueryWrapper(sql));
 
-		logExecution("Executing query " + queries.hashCode(), queries);
+		LogHelper.execution("Executing query " + queries.hashCode() + " on " + con.id, queries, log);
 		StopWatch watch = new StopWatch();
 		watch.start();
 		
@@ -383,7 +364,7 @@ public class StatementWrapper implements Statement {
 		
 		watch.stop();
 		Long duration = TimeUnit.MILLISECONDS.toMillis(watch.getTime());
-		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms");
+		log.info("Finished execution for query " + queries.hashCode() + " in " + duration + "ms" + " on " + con.id);
 	
 		return result;
 	}

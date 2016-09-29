@@ -19,6 +19,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+import org.apache.log4j.Logger;
+
+import com.hkamran.jdbclogger.instrument.LogHelper;
+
 /**
  * This class is a wrapper on the Connection class.
  * 
@@ -27,8 +31,14 @@ import java.util.concurrent.Executor;
 public class ConnectionWrapper implements Connection {
 	
 	Connection con;
+	private static Long counter = (long) 1;
+	public Long id;
+	private final static Logger log = Logger.getLogger(ConnectionWrapper.class);
 	
 	public ConnectionWrapper(Connection con) {
+		id = counter;
+		LogHelper.info("Created a new connection " + id, log);
+		counter++;
 		this.con = con;
 	}
 	
@@ -41,7 +51,7 @@ public class ConnectionWrapper implements Connection {
 	}
 
 	public Statement createStatement() throws SQLException {
-		//Wrapper
+		//Wrapper;
 		return new StatementWrapper(this, con.createStatement());
 	}
 
@@ -67,14 +77,17 @@ public class ConnectionWrapper implements Connection {
 	}
 
 	public void commit() throws SQLException {
+		LogHelper.info("Committing transaction " + id, log);
 		con.commit();
 	}
 
 	public void rollback() throws SQLException {
+		LogHelper.info("Rolling back transaction " + id, log);
 		con.rollback();
 	}
 
 	public void close() throws SQLException {
+		LogHelper.info("Closing connection " + id, log);
 		con.close();
 	}
 
