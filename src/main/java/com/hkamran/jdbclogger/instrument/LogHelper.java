@@ -8,7 +8,7 @@ import com.hkamran.jdbclogger.sql.wrappers.QueryWrapper;
 
 public class LogHelper {
 
-	private static final int START_INDEX = 3;
+	private static final int START_INDEX = 4;
 	
 	public static void execution(String start, List<QueryWrapper> queries, Logger log) {
 		StringBuffer callStack = getCallStack();
