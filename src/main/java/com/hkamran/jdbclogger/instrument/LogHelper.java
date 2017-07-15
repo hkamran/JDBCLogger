@@ -11,12 +11,20 @@ public class LogHelper {
 	private static final int START_INDEX = 4;
 	
 	public static void execution(String start, List<QueryWrapper> queries, Logger log) {
-		StringBuffer callStack = getCallStack();
+		boolean printCallStack = doPrintCallStack();
+		StringBuffer callStack = new StringBuffer();
+		if (printCallStack) callStack = getCallStack();
 		log.info(start + System.lineSeparator() + "	" + queries.toString() + callStack.toString());
 	}
+
+	private static boolean doPrintCallStack() {
+		return (boolean) System.getProperties().getOrDefault("printCallStack", true);
+	}
 	
-	public static void info(String start, Logger log) {
-		StringBuffer callStack = getCallStack();		
+	public static void info(String start, Logger log) {		
+		boolean printCallStack = doPrintCallStack();
+		StringBuffer callStack = new StringBuffer();
+		if (printCallStack) callStack = getCallStack();	
 		log.info(start + "	" + callStack.toString());
 	}
 
