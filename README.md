@@ -5,7 +5,7 @@ View what, when, and where JDBC execution occurs.
 Made so users can analyze the execution of JDBC calls in proprietary code, ORM, or any technology that hides JDBC functions.
 This allows you to properly assess the frequency, duration, and complexity of each JDBC call.
 
-# Arguments
+### Arguments
 Node: These are set via system properties.
 
 - printCallStack [true/false] `default: true`
